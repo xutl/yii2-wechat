@@ -1,10 +1,18 @@
 <?php
-
-
+/**
+ * @link http://www.tintsoft.com/
+ * @copyright Copyright (c) 2012 TintSoft Technology Co. Ltd.
+ * @license http://www.tintsoft.com/license/
+ */
 namespace xutl\wechat;
 
 use Yii;
 use yii\base\InvalidConfigException;
+use yii\web\Cookie;
+use yii\web\CookieCollection;
+use yii\web\HeaderCollection;
+use yii\web\NotFoundHttpException;
+use yii\web\RequestParserInterface;
 
 /**
  * The web Request class represents an HTTP request

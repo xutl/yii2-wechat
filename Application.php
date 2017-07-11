@@ -1,26 +1,25 @@
 <?php
-
+/**
+ * @link http://www.tintsoft.com/
+ * @copyright Copyright (c) 2012 TintSoft Technology Co. Ltd.
+ * @license http://www.tintsoft.com/license/
+ */
 
 namespace xutl\wechat;
 
 use Yii;
 use yii\base\InvalidRouteException;
 use yii\helpers\Url;
+use yii\web\ErrorHandler;
+use yii\web\NotFoundHttpException;
+use yii\web\Response;
+use yii\web\Session;
+use yii\web\UrlNormalizerRedirectException;
+use yii\web\User;
 
 /**
- * Application is the base class for all web application classes.
- *
- * For more details and usage information on Application, see the [guide article on applications](guide:structure-applications).
- *
- * @property ErrorHandler $errorHandler The error handler application component. This property is read-only.
- * @property string $homeUrl The homepage URL.
- * @property Request $request The request component. This property is read-only.
- * @property Response $response The response component. This property is read-only.
- * @property Session $session The session component. This property is read-only.
- * @property User $user The user component. This property is read-only.
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
+ * Class Application
+ * @package xutl\wechat
  */
 class Application extends \yii\web\Application
 {
@@ -28,6 +27,7 @@ class Application extends \yii\web\Application
      * @var string the default route of this application. Defaults to 'site'.
      */
     public $defaultRoute = 'site';
+
     /**
      * @var array the configuration specifying a controller action which should handle
      * all user requests. This is mainly used when the application is in maintenance mode
@@ -47,11 +47,11 @@ class Application extends \yii\web\Application
      * Defaults to null, meaning catch-all is not used.
      */
     public $catchAll;
+
     /**
      * @var Controller the currently active controller instance
      */
     public $controller;
-
 
     /**
      * @inheritdoc
@@ -98,14 +98,14 @@ class Application extends \yii\web\Application
             $result = $this->runAction($route, $params);
             if ($result instanceof Response) {
                 return $result;
-            } else {
-                $response = $this->getResponse();
-                if ($result !== null) {
-                    $response->data = $result;
-                }
-
-                return $response;
             }
+
+            $response = $this->getResponse();
+            if ($result !== null) {
+                $response->data = $result;
+            }
+
+            return $response;
         } catch (InvalidRouteException $e) {
             throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'), $e->getCode(), $e);
         }
@@ -121,12 +121,12 @@ class Application extends \yii\web\Application
         if ($this->_homeUrl === null) {
             if ($this->getUrlManager()->showScriptName) {
                 return $this->getRequest()->getScriptUrl();
-            } else {
-                return $this->getRequest()->getBaseUrl() . '/';
             }
-        } else {
-            return $this->_homeUrl;
+
+            return $this->getRequest()->getBaseUrl() . '/';
         }
+
+        return $this->_homeUrl;
     }
 
     /**
@@ -188,7 +188,7 @@ class Application extends \yii\web\Application
     public function coreComponents()
     {
         return array_merge(parent::coreComponents(), [
-            'request' => ['class' => 'yii\web\Request'],
+            'request' => ['class' => 'xutl\wechat\Request'],
             'response' => ['class' => 'yii\web\Response'],
             'session' => ['class' => 'yii\web\Session'],
             'user' => ['class' => 'yii\web\User'],
