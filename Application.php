@@ -72,7 +72,7 @@ class Application extends \yii\web\Application
         return array_merge(parent::coreComponents(), [
             'view' => ['class' => 'xutl\wechat\View'],
             'request' => ['class' => 'xutl\wechat\Request'],
-            'response' => ['class' => 'yii\web\Response'],
+            'response' => ['class' => 'yii\wechat\Response'],
             'session' => ['class' => 'yii\web\Session'],
             'user' => ['class' => 'yii\web\User'],
             'errorHandler' => ['class' => 'yii\web\ErrorHandler'],
