@@ -1,0 +1,25 @@
+{
+  "name": "xutl/yii2-wechat",
+  "description": "The wechat extension for the Yii framework",
+  "type": "yii2-extension",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "yii",
+    "api",
+    "wechat"
+  ],
+  "authors": [
+    {
+      "name": "XuTL",
+      "email": "xutl@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "xutl\\wechat\\": ""
+    }
+  }
+}
