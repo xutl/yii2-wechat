@@ -18,6 +18,6 @@ class WechatAsset extends AssetBundle
 {
 
     public $js = [
-        '//res.wx.qq.com/open/js/jweixin-1.2.0.js',
+        '//res.wx.qq.com/open/js/jweixin-1.2.1.js',
     ];
 }

@@ -16,8 +16,9 @@
   ],
   "require": {
     "php": ">=5.4.0",
+    "yiisoft/yii2-httpclient": "~2.0.0",
     "xutl/yii2-authclient": "~1.0",
-    "xutl/yii2-weui-widget":"dev-master"
+    "xutl/yii2-weui-widget": "dev-master"
   },
   "autoload": {
     "psr-4": {

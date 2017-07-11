@@ -12,6 +12,7 @@ use yii\web\User;
 use yii\helpers\Url;
 use yii\web\Session;
 use yii\web\ErrorHandler;
+use yii\httpclient\Client;
 use yii\authclient\Collection;
 use yii\web\NotFoundHttpException;
 use yii\base\InvalidRouteException;
@@ -24,6 +25,11 @@ use yii\web\UrlNormalizerRedirectException;
  */
 class Application extends \yii\web\Application
 {
+    /**
+     * @var bool 是否使用企业号
+     */
+    public $useQy = false;
+
     /**
      * Returns the error handler component.
      * @return ErrorHandler the error handler application component.
@@ -76,6 +82,26 @@ class Application extends \yii\web\Application
     public function getUser()
     {
         return $this->get('user');
+    }
+
+    public function getJsApiTicket()
+    {
+        $cache = $this->cache; // Could be Yii::$app->cache
+        return $cache->getOrSet(__METHOD__, function ($cache) {
+            $client = new Client();
+            $client->get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$this->appId&secret=$this->appSecret");
+            return Products::find()->mostPopular()->limit(10)->all();
+        }, 7000);
+    }
+
+    public function getAccessToken()
+    {
+        $cache = $this->cache; // Could be Yii::$app->cache
+        return $cache->getOrSet(__METHOD__, function ($cache) {
+            $client = new Client();
+            $client->get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$this->appId&secret=$this->appSecret");
+            return Products::find()->mostPopular()->limit(10)->all();
+        }, 7000);
     }
 
     /**
