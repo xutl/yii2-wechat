@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace xutl\web;
+namespace xutl\wechat;
 
 use xutl\wechat\WechatAsset;
 use Yii;
