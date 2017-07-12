@@ -39,9 +39,10 @@ composer require "xutl/yii2-wechat:~1.0" -vvv
 
 - 微信公众平台文档: https://mp.weixin.qq.com/wiki
 
-## THS
+## Thanks to
 
-[http://easywechat.org/](http://easywechat.org/)。
+* [Yii framework](https://github.com/yiisoft/yii2)
+* [easywechat](https://github.com/overtrue/wechat)。
 
 ## License
 
