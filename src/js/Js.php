@@ -7,17 +7,19 @@
 
 namespace xutl\wechat\js;
 
+use xutl\wechat\Api;
 use Yii;
+use yii\base\Component;
 use yii\di\Instance;
 use yii\helpers\Json;
 use yii\caching\Cache;
 use yii\helpers\Url;
-use xutl\wechat\BaseApi;
+use yii\httpclient\Client;
 
 /**
  * Class Js.
  */
-class Js extends BaseApi
+class Js extends Api
 {
     /**
      * Cache.
@@ -92,7 +94,7 @@ class Js extends BaseApi
     {
         $cacheKey = [__CLASS__, 'appId' => Yii::$app->accessToken->appId];
         if ($forceRefresh || ($ticket = $this->cache->get($cacheKey)) === false) {
-            $response = $this->sendRequest(self::POST, self::API_TICKET, ['type' => 'jsapi']);
+            $response = $this->post(self::API_TICKET, ['type' => 'jsapi']);
             $this->cache->set($cacheKey, $response['ticket'], $response['expires_in'] - 500);
             return $response['ticket'];
         }

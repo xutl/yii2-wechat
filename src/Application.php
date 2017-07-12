@@ -25,6 +25,7 @@ use xutl\wechat\js\Js;
  * @property Collection $authClientCollection The auth client component. This property is read-only.
  * @property AccessToken $accessToken The access token component. This property is read-only.
  * @property Js $js The access token component. This property is read-only.
+ * @property Js $notice The Notice component. This property is read-only.
  * @package xutl\wechat
  */
 class Application extends \yii\web\Application
@@ -48,6 +49,15 @@ class Application extends \yii\web\Application
     }
 
     /**
+     * Returns the Js for this application.
+     * @return \xutl\wechat\js\Js the Js for this application.
+     */
+    public function getNotice()
+    {
+        return $this->get('notice');
+    }
+
+    /**
      * @inheritdoc
      */
     public function coreComponents()
@@ -63,6 +73,7 @@ class Application extends \yii\web\Application
 
             'accessToken' => ['class' => 'xutl\wechat\AccessToken'],
             'js' => ['class' => 'xutl\wechat\js\Js'],
+            'notice' => ['class' => 'xutl\wechat\notice\Notice'],
         ]);
     }
 }
