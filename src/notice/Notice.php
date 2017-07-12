@@ -80,10 +80,10 @@ class Notice extends Api
     }
 
     /**
-     * Set industry.
+     * 设置所属行业
      *
-     * @param int $industryOne
-     * @param int $industryTwo
+     * @param int $industryOne 公众号模板消息所属行业编号
+     * @param int $industryTwo 公众号模板消息所属行业编号
      * @return array
      */
     public function setIndustry($industryOne, $industryTwo)
@@ -96,7 +96,7 @@ class Notice extends Api
     }
 
     /**
-     * Get industry.
+     * 获取设置的行业信息
      * @return array
      */
     public function getIndustry()
@@ -105,7 +105,7 @@ class Notice extends Api
     }
 
     /**
-     * Add a template and get template ID.
+     * 获得模板ID
      *
      * @param string $shortId
      * @return array
@@ -117,7 +117,7 @@ class Notice extends Api
     }
 
     /**
-     * Get private templates.
+     * 获取模板列表
      *
      * @return array
      */
@@ -127,7 +127,7 @@ class Notice extends Api
     }
 
     /**
-     * Delete private template.
+     * 删除模板
      *
      * @param string $templateId
      *
@@ -140,20 +140,19 @@ class Notice extends Api
     }
 
     /**
-     * Send a notice message.
+     * 发送模板消息
      *
      * @param $data
      * @param array $data
      * @return array
      */
-    public function send($data = [])
+    public function send(array $data = [])
     {
         $params = array_merge($this->message, $data);
         foreach ($params as $key => $value) {
             if (in_array($key, $this->required, true) && empty($value) && empty($this->message[$key])) {
                 throw new InvalidArgumentException("Attribute '$key' can not be empty!");
             }
-
             $params[$key] = empty($value) ? $this->message[$key] : $value;
         }
         $params['data'] = $this->formatData($params['data']);
@@ -197,7 +196,7 @@ class Notice extends Api
     }
 
     /**
-     * Format template data.
+     * 格式化模板数据
      *
      * @param array $data
      *
