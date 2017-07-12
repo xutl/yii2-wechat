@@ -7,6 +7,7 @@
 
 namespace xutl\wechat;
 
+
 use Yii;
 use yii\web\User;
 use yii\helpers\Url;
@@ -17,91 +18,33 @@ use yii\authclient\Collection;
 use yii\web\NotFoundHttpException;
 use yii\base\InvalidRouteException;
 use yii\web\UrlNormalizerRedirectException;
+use xutl\wechat\js\Js;
 
 /**
  * Class Application
  * @property Collection $authClientCollection The auth client component. This property is read-only.
+ * @property AccessToken $accessToken The access token component. This property is read-only.
+ * @property Js $js The access token component. This property is read-only.
  * @package xutl\wechat
  */
 class Application extends \yii\web\Application
 {
     /**
-     * @var bool 是否使用企业号
+     * Returns the access token for this application.
+     * @return \xutl\wechat\AccessToken the access token for this application.
      */
-    public $useQy = false;
-
-    /**
-     * Returns the error handler component.
-     * @return ErrorHandler the error handler application component.
-     */
-    public function getErrorHandler()
-    {
-        return $this->get('errorHandler');
-    }
-
-    /**
-     * Returns the authClient component.
-     * @return Collection the authClient application component.
-     */
-    public function getAuthClientCollection()
-    {
-        return $this->get('authClientCollection');
-    }
-
-    /**
-     * Returns the request component.
-     * @return Request the request component.
-     */
-    public function getRequest()
-    {
-        return $this->get('request');
-    }
-
-    /**
-     * Returns the response component.
-     * @return Response the response component.
-     */
-    public function getResponse()
-    {
-        return $this->get('response');
-    }
-
-    /**
-     * Returns the session component.
-     * @return Session the session component.
-     */
-    public function getSession()
-    {
-        return $this->get('session');
-    }
-
-    /**
-     * Returns the user component.
-     * @return User the user component.
-     */
-    public function getUser()
-    {
-        return $this->get('user');
-    }
-
-    public function getJsApiTicket()
-    {
-        $cache = $this->cache; // Could be Yii::$app->cache
-        return $cache->getOrSet(__METHOD__, function ($cache) {
-            $client = new Client();
-            $client->get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$this->appId&secret=$this->appSecret");
-            return Products::find()->mostPopular()->limit(10)->all();
-        }, 7000);
-    }
-
     public function getAccessToken()
     {
-        $cache = $this->cache; // Could be Yii::$app->cache
-        return $cache->getOrSet(__METHOD__, function ($cache) {
-            $client = new Client();
-            $client->get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$this->appId&secret=$this->appSecret");
-            return Products::find()->mostPopular()->limit(10)->all();
-        }, 7000);
+        return $this->get('accessToken');
+    }
+
+    /**
+     * Returns the Js for this application.
+     * @return \xutl\wechat\js\Js the Js for this application.
+     */
+    public function getJs()
+    {
+        return $this->get('js');
     }
 
     /**
@@ -109,22 +52,17 @@ class Application extends \yii\web\Application
      */
     public function coreComponents()
     {
+
         return array_merge(parent::coreComponents(), [
-            'view' => [
-                'class' => 'xutl\wechat\View',
-            ],
-            'request' => [
-                'class' => 'xutl\wechat\Request',
-                'parsers' => [
-                    'application/json' => 'yii\web\JsonParser',
-                    'text/json' => 'yii\web\JsonParser',
-                ],
-            ],
-            'response' => ['class' => 'yii\wechat\Response'],
-            'session' => ['class' => 'yii\web\Session'],
-            'user' => ['class' => 'yii\web\User'],
-            'errorHandler' => ['class' => 'yii\web\ErrorHandler'],
-            'authClientCollection' => ['class' => 'yii\authclient\Collection'],
+//            'view' => [
+//                'class' => 'xutl\wechat\View',
+//            ],
+
+            'request' => ['class' => 'xutl\wechat\Request'],
+            'response' => ['class' => 'xutl\wechat\Response'],
+
+            'accessToken' => ['class' => 'xutl\wechat\AccessToken'],
+            'js' => ['class' => 'xutl\wechat\js\Js'],
         ]);
     }
 }
