@@ -42,6 +42,6 @@ wx.config({
 </script>
 ```
 
-更多 JSSDK 的使用请参考 微信官方文档 中 JSSDK章节
+更多 JSSDK 的使用请参考 [微信官方文档](https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1445241432)。 中 JSSDK章节
 
 
