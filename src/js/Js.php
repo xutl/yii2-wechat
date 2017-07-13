@@ -47,7 +47,7 @@ class Js extends Api
     {
         parent::init();
         if ($this->cache !== null) {
-            $this->cache = Instance::ensure($this->cache, 'yii\caching\CacheInterface');
+            $this->cache = Instance::ensure($this->cache, Cache::class);
         }
     }
 

@@ -71,7 +71,7 @@ class AccessToken extends Component
             throw new InvalidConfigException ('The "appSecret" property must be set.');
         }
         if ($this->cache !== null) {
-            $this->cache = Instance::ensure($this->cache, 'yii\caching\CacheInterface');
+            $this->cache = Instance::ensure($this->cache, Cache::class);
         }
     }
 
@@ -118,7 +118,7 @@ class AccessToken extends Component
      * 设置自定义 token.
      *
      * @param string $token
-     * @param int    $expires
+     * @param int $expires
      *
      * @return $this
      */
