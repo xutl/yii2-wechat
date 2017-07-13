@@ -19,7 +19,7 @@
     "yiisoft/yii2-httpclient": "~2.0.0",
     "xutl/yii2-authclient": "~1.0",
     "xutl/yii2-collection": "~1.0",
-    "xutl/yii2-weui-widget": "dev-master"
+    "xutl/yii2-weui-widget": "~1.0"
   },
   "autoload": {
     "psr-4": {
