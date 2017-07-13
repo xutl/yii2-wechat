@@ -156,7 +156,7 @@ class Js extends Api
     }
 
     /**
-     * Get current url.
+     * 获取当前Url,不走路由解析
      *
      * @return string
      */
@@ -165,6 +165,6 @@ class Js extends Api
         if ($this->url) {
             return $this->url;
         }
-        return Url::current();
+        return Yii::$app->request->absoluteUrl;
     }
 }
