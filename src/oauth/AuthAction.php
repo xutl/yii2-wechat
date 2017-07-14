@@ -12,15 +12,12 @@ use yii\authclient\OAuth2;
 use yii\base\Action;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
-use yii\base\NotSupportedException;
 use yii\helpers\Url;
 use yii\web\Response;
-use yii\web\HttpException;
-use yii\web\NotFoundHttpException;
 
 /**
  * AuthAction performs authentication via different auth clients.
- * It supports [[OpenId]], [[OAuth1]] and [[OAuth2]] client types.
+ * It supports [[OAuth2]] client types.
  *
  * Usage:
  *
@@ -48,23 +45,11 @@ use yii\web\NotFoundHttpException;
  * Usually authentication via external services is performed inside the popup window.
  * This action handles the redirection and closing of popup window correctly.
  *
- * @see Collection
- * @see \yii\authclient\widgets\AuthChoice
- *
  * @property string $cancelUrl Cancel URL.
  * @property string $successUrl Successful URL.
- *
- * @author Paul Klimov <klimov.paul@gmail.com>
- * @since 2.0
  */
 class AuthAction extends Action
 {
-    /**
-     * @var string name of the GET param, which is used to passed auth client id to this action.
-     * Note: watch for the naming, make sure you do not choose name used in some auth protocol.
-     */
-    public $clientIdGetParamName = 'authclient';
-
     /**
      * @var callable PHP callback, which should be triggered in case of successful authentication.
      * This callback should accept [[ClientInterface]] instance as an argument.
@@ -116,7 +101,6 @@ class AuthAction extends Action
         if (empty($this->_successUrl)) {
             $this->_successUrl = $this->defaultSuccessUrl();
         }
-
         return $this->_successUrl;
     }
 
