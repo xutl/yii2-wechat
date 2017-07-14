@@ -13,17 +13,17 @@ use yii\helpers\Url;
 use yii\web\Session;
 use yii\web\ErrorHandler;
 use yii\httpclient\Client;
-use yii\authclient\Collection;
 use yii\web\NotFoundHttpException;
 use yii\base\InvalidRouteException;
 use yii\web\UrlNormalizerRedirectException;
 use xutl\wechat\js\Js;
+use xutl\wechat\oauth\OAuth;
 use xutl\wechat\notice\Notice;
 use xutl\wechat\qrcode\QRCode;
 
 /**
  * Class Application
- * @property Collection $authClientCollection The auth client component. This property is read-only.
+ * @property OAuth $oauth The oauth component. This property is read-only.
  * @property AccessToken $accessToken The access token component. This property is read-only.
  * @property Js $js The access token component. This property is read-only.
  * @property Notice $notice The Notice component. This property is read-only.
@@ -33,6 +33,15 @@ use xutl\wechat\qrcode\QRCode;
  */
 class Application extends \yii\web\Application
 {
+    /**
+     * Returns the oauth client collection for this application.
+     * @return OAuth the oauth client collection for this application.
+     */
+    public function getOauth()
+    {
+        return $this->get('oauth');
+    }
+
     /**
      * Returns the access token for this application.
      * @return \xutl\wechat\AccessToken the access token for this application.
@@ -88,15 +97,31 @@ class Application extends \yii\web\Application
 //            'view' => [
 //                'class' => 'xutl\wechat\View',
 //            ],
-
-            'request' => ['class' => 'xutl\wechat\Request'],
-            'response' => ['class' => 'xutl\wechat\Response'],
+            'request' => [
+                'class' => 'xutl\wechat\Request',
+            ],
+            'response' => [
+                'class' => 'xutl\wechat\Response',
+            ],
             //微信专用
-            'accessToken' => ['class' => 'xutl\wechat\AccessToken'],
-            'js' => ['class' => 'xutl\wechat\js\Js'],
-            'notice' => ['class' => 'xutl\wechat\notice\Notice'],
-            'url' => ['class' => 'xutl\wechat\url\url'],
-            'qrcode' => ['class' => 'xutl\wechat\qrcode\QRCode'],
+            'oauth' => [
+                'class' => 'xutl\wechat\oauth\OAuth',
+            ],
+            'accessToken' => [
+                'class' => 'xutl\wechat\AccessToken',
+            ],
+            'js' => [
+                'class' => 'xutl\wechat\js\Js',
+            ],
+            'notice' => [
+                'class' => 'xutl\wechat\notice\Notice',
+            ],
+            'url' => [
+                'class' => 'xutl\wechat\url\url',
+            ],
+            'qrcode' => [
+                'class' => 'xutl\wechat\qrcode\QRCode',
+            ],
         ]);
     }
 }
