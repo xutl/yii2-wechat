@@ -48,17 +48,6 @@ class OAuth extends OAuth2
     }
 
     /**
-     * @inheritdoc
-     */
-    protected function defaultNormalizeUserAttributeMap()
-    {
-        return [
-            'id' => 'openid',
-            'nickname' => 'nickname',
-        ];
-    }
-
-    /**
      * Composes user authorization URL.
      * @param array $params additional auth GET params.
      * @return string authorization URL.
