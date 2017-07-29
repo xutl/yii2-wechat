@@ -7,6 +7,7 @@
 
 namespace xutl\wechat;
 
+use xutl\wechat\menu\Menu;
 use Yii;
 use yii\web\User;
 use yii\helpers\Url;
@@ -23,6 +24,7 @@ use xutl\wechat\qrcode\QRCode;
  * @property Notice $notice The Notice component. This property is read-only.
  * @property Url $url The Url component. This property is read-only.
  * @property QRCode $qrcode The Url component. This property is read-only.
+ * @property Menu $menu The Url component. This property is read-only.
  * @package xutl\wechat
  */
 class Application extends \yii\web\Application
@@ -82,6 +84,15 @@ class Application extends \yii\web\Application
     }
 
     /**
+     * Returns the Menu for this application.
+     * @return Menu the Js for this application.
+     */
+    public function getMenu()
+    {
+        return $this->get('menu');
+    }
+
+    /**
      * @inheritdoc
      */
     public function coreComponents()
@@ -115,6 +126,9 @@ class Application extends \yii\web\Application
             ],
             'qrcode' => [
                 'class' => 'xutl\wechat\qrcode\QRCode',
+            ],
+            'menu' => [
+                'class' => 'xutl\wechat\menu\Menu',
             ],
         ]);
     }
