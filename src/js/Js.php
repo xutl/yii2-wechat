@@ -64,8 +64,7 @@ class Js extends Api
     public function config(array $APIs, $debug = false, $beta = false, $json = true)
     {
         $signPackage = $this->signature();
-        $base = ['debug' => $debug, 'beta' => $beta,];
-        $config = array_merge($base, $signPackage, ['jsApiList' => $APIs]);
+        $config = array_merge(['debug' => $debug, 'beta' => $beta], $signPackage, ['jsApiList' => $APIs]);
         return $json ? Json::encode($config) : $config;
     }
 

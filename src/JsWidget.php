@@ -109,6 +109,6 @@ class JsWidget extends Widget
         $config = Yii::$app->js->config($this->apiList);
         $view = $this->getView();
         WechatAsset::register($view);
-        $view->registerJs("wx.config({$config});wx.error(function(res){console.log(res);});", View::POS_END);
+        $view->registerJs("wx.config({$config});wx.error(function(res){console.error(res.errMsg);});wx.ready(function (){console.info('wechat jssdk init.');});", View::POS_END);
     }
 }

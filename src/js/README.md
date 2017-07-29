@@ -42,6 +42,12 @@ wx.config({
 </script>
 ```
 
+小部件
+
+    <?= \xutl\wechat\JsWidget::widget(['apiList' => ['checkJsApi', 'chooseWXPay']]); ?>
+
+结果同上
+
 更多 JSSDK 的使用请参考 [微信官方文档](https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1445241432)。 中 JSSDK章节
 
 
