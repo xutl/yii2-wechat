@@ -52,8 +52,9 @@ class Temporary extends Api
         $mime = strstr($finfo->buffer($stream), ';', true);
         $extensions = FileHelper::getExtensionsByMimeType($mime);
         $filename .= '.' . array_pop($extensions);
-        file_put_contents($directory . '/' . $filename, $stream);
-        return $filename;
+        $filePath = $directory . '/' . $filename;
+        file_put_contents($filePath, $stream);
+        return $filePath;
     }
 
     /**
