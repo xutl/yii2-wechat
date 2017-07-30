@@ -16,6 +16,7 @@ use yii\httpclient\Exception;
 use yii\base\InvalidConfigException;
 use yii\httpclient\RequestEvent;
 use xutl\wechat\AccessToken;
+use yii\web\HttpException;
 
 /**
  * Class BaseApi
@@ -185,5 +186,21 @@ abstract class Api extends Component
         }
         $url .= http_build_query($params, '', '&', PHP_QUERY_RFC3986);
         return $url;
+    }
+
+    /**
+     * Check the array data errors, and Throw exception when the contents contains error.
+     * @param array $contents
+     * @throws HttpException
+     */
+    protected function checkAndThrow(array $contents)
+    {
+        if (isset($contents['errcode']) && 0 !== $contents['errcode']) {
+            if (empty($contents['errmsg'])) {
+                $contents['errmsg'] = 'Unknown';
+            }
+
+            throw new HttpException($contents['errmsg'], $contents['errcode']);
+        }
     }
 }
