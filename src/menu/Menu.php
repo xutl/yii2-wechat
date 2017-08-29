@@ -9,6 +9,10 @@ namespace xutl\wechat\menu;
 
 use xutl\wechat\Api;
 
+/**
+ * 自定义菜单
+ * @package xutl\wechat\menu
+ */
 class Menu extends Api
 {
     const API_CREATE = 'https://api.weixin.qq.com/cgi-bin/menu/create';

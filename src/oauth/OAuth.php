@@ -12,6 +12,10 @@ use yii\authclient\OAuth2;
 use yii\authclient\OAuthToken;
 use yii\base\Exception;
 
+/**
+ * OAuth2 登录认证
+ * @package xutl\wechat\oauth
+ */
 class OAuth extends OAuth2
 {
     /**

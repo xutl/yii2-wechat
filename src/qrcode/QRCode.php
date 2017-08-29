@@ -10,7 +10,7 @@ namespace xutl\wechat\qrcode;
 use xutl\wechat\Api;
 
 /**
- * Class QRCode
+ * 二维码模块
  * @package xutl\wechat\qrcode
  */
 class QRCode extends Api

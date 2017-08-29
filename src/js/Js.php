@@ -17,7 +17,8 @@ use yii\helpers\Url;
 use yii\httpclient\Client;
 
 /**
- * Class Js.
+ * JSSDK
+ * @package xutl\wechat\js
  */
 class Js extends Api
 {

@@ -14,7 +14,8 @@ namespace xutl\wechat\url;
 use xutl\wechat\Api;
 
 /**
- * Class Url.
+ * Url模块
+ * @package xutl\wechat\url
  */
 class Url extends Api
 {
