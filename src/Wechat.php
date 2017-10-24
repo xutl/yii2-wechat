@@ -7,35 +7,35 @@
 
 namespace xutl\wechat;
 
+
 use Yii;
-use yii\di\Instance;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
-use xutl\wechat\oauth\OAuth;
-use xutl\wechat\AccessToken;
+use yii\base\InvalidParamException;
+use yii\caching\Cache;
+use yii\di\Instance;
 use xutl\wechat\js\Js;
-use xutl\wechat\notice\Notice;
 use xutl\wechat\url\Url;
-use xutl\wechat\qrcode\QRCode;
 use xutl\wechat\menu\Menu;
+use xutl\wechat\oauth\OAuth;
+use xutl\wechat\qrcode\QRCode;
+use xutl\wechat\notice\Notice;
 use xutl\wechat\material\Material;
 use xutl\wechat\material\Temporary;
-use yii\caching\CacheInterface;
-
 
 /**
  * Class Wechat
  *
- * @property OAuth $oauth The oauth client collection for this wechat.
- * @property AccessToken $accessToken The access token for this wechat.
- * @property Js $js The js for this wechat.
- * @property Notice $notice The js for this wechat.
- * @property Url $url The js for this wechat.
- * @property QRCode $qrcode The js for this wechat.
- * @property Menu $menu The js for this wechat.
- * @property Material $material The js for this wechat.
- * @property Temporary $materialTemporary The js for this wechat.
- *
+ * @property OAuth $oauth
+ * @property AccessToken $accessToken
+ * @property Js $js
+ * @property Notice $notice
+ * @property Url $url
+ * @property Menu $menu
+ * @property QRCode $qrcode
+ * @property Material $material
+ * @property Temporary $materialTemporary
+ * @property Cache $cache
  * @package xutl\wechat
  */
 class Wechat extends Component
@@ -51,18 +51,14 @@ class Wechat extends Component
     public $appSecret;
 
     /**
-     * @var CacheInterface|array|string This can be one of the following:
-     *
-     * - an application component ID (e.g. `cache`)
-     * - a configuration array
-     * - a [[\yii\caching\Cache]] object
-     *
-     * When this is not set, it means caching is not enabled.
+     * @var string|Cache
      */
-    public $cache;
+    public $cache = 'cache';
 
     /**
-     * 初始化组件
+     * Initializes the object.
+     * This method is invoked at the end of the constructor after the object is initialized with the
+     * given configuration.
      */
     public function init()
     {
@@ -74,25 +70,93 @@ class Wechat extends Component
             throw new InvalidConfigException ('The "appSecret" property must be set.');
         }
         if ($this->cache !== null) {
-            $this->cache = Instance::ensure($this->cache, 'yii\caching\CacheInterface');
+            $this->cache = Instance::ensure($this->cache, Cache::class);
         }
     }
 
+    /**
+     * @return object|AccessToken
+     */
     public function getAccessToken()
     {
         return Yii::createObject([
-            'class' => AccessToken::className(),
-            'appId' => $this->appId,
-            'appSecret' => $this->appSecret,
+            'class' => 'xutl\wechat\AccessToken',
         ]);
     }
 
     /**
-     * check if client is wechat
-     * @return bool
+     * @return object|OAuth
      */
-    public function getIsWechat()
+    public function getOauth()
     {
-        return strpos($_SERVER["HTTP_USER_AGENT"], "MicroMessenger") !== false;
+        return Yii::createObject([
+            'class' => 'xutl\wechat\oauth\OAuth',
+        ]);
+    }
+
+    /**
+     * @return object|Js
+     */
+    public function getJs()
+    {
+        return Yii::createObject([
+            'class' => 'xutl\wechat\js\Js',
+        ]);
+    }
+
+    /**
+     * @return object|Notice
+     */
+    public function getNotice()
+    {
+        return Yii::createObject([
+            'class' => 'xutl\wechat\notice\Notice',
+        ]);
+    }
+
+    /**
+     * @return object|Url
+     */
+    public function getUrl()
+    {
+        return Yii::createObject([
+            'class' => 'xutl\wechat\url\Url',
+        ]);
+    }
+
+    /**
+     * @return object|Menu
+     */
+    public function getMenu(){
+        return Yii::createObject([
+            'class' => 'xutl\wechat\menu\Menu',
+        ]);
+    }
+
+    /**
+     * @return object|QRCode
+     */
+    public function getQrcode(){
+        return Yii::createObject([
+            'class' => 'xutl\wechat\qrcode\QRCode',
+        ]);
+    }
+
+    /**
+     * @return object|Material
+     */
+    public function getMaterial(){
+        return Yii::createObject([
+            'class' => 'xutl\wechat\material\Material',
+        ]);
+    }
+
+    /**
+     * @return object|Temporary
+     */
+    public function getMaterialTemporary(){
+        return Yii::createObject([
+            'class' => 'xutl\wechat\material\Temporary',
+        ]);
     }
 }

@@ -7,7 +7,7 @@
 <?php
 use Yii;
 
-$menu = Yii::$app->menu;
+$menu = Yii::$app->wechat->menu;
 ```
 
 

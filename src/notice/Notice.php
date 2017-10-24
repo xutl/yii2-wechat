@@ -7,11 +7,12 @@
 
 namespace xutl\wechat\notice;
 
+
 use xutl\wechat\Api;
 use InvalidArgumentException;
 
 /**
- * SDK 模板消息
+ * Class Notice
  * @package xutl\wechat\notice
  */
 class Notice extends Api

@@ -9,6 +9,7 @@ namespace xutl\wechat;
 
 use Yii;
 use yii\base\Widget;
+use yii\web\View;
 
 /**
  * Class JsWidget
@@ -36,9 +37,6 @@ class JsWidget extends Widget
      */
     protected function initOptions()
     {
-        if (!Yii::$app instanceof \xutl\wechat\Application) {
-
-        }
         $this->apiList = array_merge([
             //基础接口
             'checkJsApi',//判断当前客户端是否支持指定JS接口
@@ -106,7 +104,7 @@ class JsWidget extends Widget
      */
     public function registerAssets()
     {
-        $config = Yii::$app->js->config($this->apiList);
+        $config = Yii::$app->wechat->js->config($this->apiList);
         $view = $this->getView();
         WechatAsset::register($view);
         $view->registerJs("wx.config({$config});wx.error(function(res){console.error(res.errMsg);});wx.ready(function (){console.info('wechat jssdk init.');});", View::POS_END);

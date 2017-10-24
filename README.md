@@ -1,6 +1,8 @@
 # yii2-wechat
 
-这是一个适用于Yii2的微信SDK
+这是一个适用于Yii2的微信SDK。
+
+[![Build Status](https://travis-ci.org/xutl/yii2-wechat.svg?branch=master)](https://travis-ci.org/xutl/yii2-wechat)
 
 ## Feature
 
@@ -30,8 +32,13 @@ composer require "xutl/yii2-wechat:~1.0" -vvv
 
 ```php
 <?php
-
-
+    'components' => [
+        'wechat' => [
+            'class' => 'xutl\wechat\Wechat',
+            'appId' => 'wx23fc4372b2498821',
+            'appSecret' => '5a4014e73817483362d54f77f8bdb6b9',
+        ],
+    ]
 ```
 
 

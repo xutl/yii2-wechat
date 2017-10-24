@@ -9,13 +9,10 @@ namespace xutl\wechat;
 
 use Yii;
 use yii\base\Component;
-use yii\di\Instance;
 use yii\helpers\Json;
 use yii\httpclient\Client;
 use yii\httpclient\Exception;
-use yii\base\InvalidConfigException;
 use yii\httpclient\RequestEvent;
-use xutl\wechat\AccessToken;
 use yii\web\HttpException;
 
 /**
@@ -28,24 +25,6 @@ abstract class Api extends Component
      * @var Client
      */
     public $_httpClient;
-
-    /**
-     * The request token.
-     *
-     * @var AccessToken AccessToken 实例
-     */
-    protected $accessToken = 'accessToken';
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-        if ($this->accessToken !== null) {
-            $this->accessToken = Instance::ensure($this->accessToken, AccessToken::class);
-        }
-    }
 
     /**
      * 获取Http Client
@@ -67,9 +46,9 @@ abstract class Api extends Component
             $this->_httpClient->on(Client::EVENT_BEFORE_SEND, function (RequestEvent $event) {
                 $url = $event->request->getUrl();
                 if (is_array($url)) {
-                    $url = array_merge($url, [$this->accessToken->queryName => $this->accessToken->getToken()]);
+                    $url = array_merge($url, [Yii::$app->wechat->accessToken->queryName => Yii::$app->wechat->accessToken->getToken()]);
                 } else {
-                    $url = [$url, $this->accessToken->queryName => $this->accessToken->getToken()];
+                    $url = [$url, Yii::$app->wechat->accessToken->queryName => Yii::$app->wechat->accessToken->getToken()];
                 }
                 $event->request->setUrl($url);
             });
@@ -199,7 +178,6 @@ abstract class Api extends Component
             if (empty($contents['errmsg'])) {
                 $contents['errmsg'] = 'Unknown';
             }
-
             throw new HttpException($contents['errmsg'], $contents['errcode']);
         }
     }

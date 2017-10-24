@@ -25,7 +25,7 @@
 <?php
 use Yii;
 
-$notice = Yii::$app->notice;
+$notice = Yii::$app->wechat->notice;
 ```
 
 ### API

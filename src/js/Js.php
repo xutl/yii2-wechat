@@ -7,27 +7,18 @@
 
 namespace xutl\wechat\js;
 
-use xutl\wechat\Api;
 use Yii;
-use yii\base\Component;
 use yii\di\Instance;
 use yii\helpers\Json;
 use yii\caching\Cache;
-use yii\helpers\Url;
-use yii\httpclient\Client;
+use xutl\wechat\Api;
 
 /**
- * JSSDK
+ * Class Js
  * @package xutl\wechat\js
  */
 class Js extends Api
 {
-    /**
-     * Cache.
-     *
-     * @var Cache
-     */
-    public $cache = 'cache';
 
     /**
      * Current URI.
@@ -40,17 +31,6 @@ class Js extends Api
      * Api of ticket.
      */
     const API_TICKET = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket';
-
-    /**
-     * 初始化组件
-     */
-    public function init()
-    {
-        parent::init();
-        if ($this->cache !== null) {
-            $this->cache = Instance::ensure($this->cache, Cache::class);
-        }
-    }
 
     /**
      * Get config json for jsapi.
@@ -92,10 +72,10 @@ class Js extends Api
      */
     public function ticket($forceRefresh = false)
     {
-        $cacheKey = [__CLASS__, 'appId' => Yii::$app->accessToken->appId];
-        if ($forceRefresh || ($ticket = $this->cache->get($cacheKey)) === false) {
+        $cacheKey = [__CLASS__, 'appId' => Yii::$app->wechat->appId];
+        if ($forceRefresh || ($ticket = Yii::$app->wechat->cache->get($cacheKey)) === false) {
             $response = $this->post(self::API_TICKET, ['type' => 'jsapi']);
-            $this->cache->set($cacheKey, $response['ticket'], $response['expires_in'] - 500);
+            Yii::$app->wechat->cache->set($cacheKey, $response['ticket'], $response['expires_in'] - 500);
             return $response['ticket'];
         }
         return $ticket;
@@ -117,7 +97,7 @@ class Js extends Api
         $timestamp = $timestamp ? $timestamp : time();
         $ticket = $this->ticket();
         $sign = [
-            'appId' => Yii::$app->accessToken->appId,
+            'appId' => Yii::$app->wechat->appId,
             'nonceStr' => $nonce,
             'timestamp' => $timestamp,
             'url' => $url,

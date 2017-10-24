@@ -147,8 +147,7 @@ class AuthAction extends Action
      */
     public function run()
     {
-        /** @var \xutl\wechat\oauth\OAuth $client */
-        $client = Yii::$app->oauth;
+        $client = Yii::$app->wechat->oauth;
         return $this->auth($client);
     }
 

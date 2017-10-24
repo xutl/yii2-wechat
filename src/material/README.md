@@ -8,9 +8,9 @@
 use Yii;
 
 // 永久素材
-$material = Yii::$app->material;
+$material = Yii::$app->wechat->material;
 // 临时素材
-$temporary = Yii::$app->materialYemporary;
+$temporary = Yii::$app->wechat->materialYemporary;
 
 ```
 

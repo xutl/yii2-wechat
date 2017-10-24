@@ -8,10 +8,7 @@
 namespace xutl\wechat;
 
 use Yii;
-use yii\caching\Cache;
-use yii\di\Instance;
 use yii\base\Component;
-use yii\base\InvalidConfigException;
 use yii\httpclient\Client;
 use yii\httpclient\Exception;
 
@@ -22,21 +19,6 @@ use yii\httpclient\Exception;
  */
 class AccessToken extends Component
 {
-    /**
-     * @var string
-     */
-    public $appId;
-
-    /**
-     * @var string
-     */
-    public $appSecret;
-
-    /**
-     * @var string|Cache
-     */
-    public $cache = 'cache';
-
     /**
      * Query name.
      *
@@ -57,23 +39,6 @@ class AccessToken extends Component
     private $_httpClient;
 
     const API_TOKEN_GET = 'https://api.weixin.qq.com/cgi-bin/token';
-
-    /**
-     * 初始化组件
-     */
-    public function init()
-    {
-        parent::init();
-        if (empty ($this->appId)) {
-            throw new InvalidConfigException ('The "appId" property must be set.');
-        }
-        if (empty ($this->appSecret)) {
-            throw new InvalidConfigException ('The "appSecret" property must be set.');
-        }
-        if ($this->cache !== null) {
-            $this->cache = Instance::ensure($this->cache, Cache::class);
-        }
-    }
 
     /**
      * 获取Http Client
@@ -105,10 +70,10 @@ class AccessToken extends Component
      */
     public function getToken($forceRefresh = false)
     {
-        $cacheKey = [__CLASS__, 'appId' => $this->appId];
-        if ($forceRefresh || ($accessToken = $this->cache->get($cacheKey)) === false) {
+        $cacheKey = [__CLASS__, 'appId' => Yii::$app->wechat->appId];
+        if ($forceRefresh || ($accessToken = Yii::$app->wechat->cache->get($cacheKey)) === false) {
             $token = $this->getTokenFromServer();
-            $this->cache->set($cacheKey, $token[$this->tokenJsonKey], $token['expires_in'] - 1500);
+            Yii::$app->wechat->cache->set($cacheKey, $token[$this->tokenJsonKey], $token['expires_in'] - 1500);
             return $token[$this->tokenJsonKey];
         }
         return $accessToken;
@@ -124,7 +89,7 @@ class AccessToken extends Component
      */
     public function setToken($token, $expires = 7200)
     {
-        $this->cache->set([__CLASS__, 'appId' => $this->appId], $token, $expires - 1500);
+        Yii::$app->wechat->cache->set([__CLASS__, 'appId' => Yii::$app->wechat->appId], $token, $expires - 1500);
         return $this;
     }
 
@@ -135,7 +100,7 @@ class AccessToken extends Component
      */
     public function getTokenFromServer()
     {
-        $params = ['appid' => $this->appId, 'secret' => $this->appSecret, 'grant_type' => 'client_credential',];
+        $params = ['appid' => Yii::$app->wechat->appId, 'secret' => Yii::$app->wechat->appSecret, 'grant_type' => 'client_credential',];
         $response = $this->getHttpClient()->createRequest()
             ->setUrl(self::API_TOKEN_GET)
             ->setMethod('GET')

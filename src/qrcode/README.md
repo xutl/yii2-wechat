@@ -12,7 +12,7 @@
 <?php
 use Yii;
 
-$qrcode = Yii::$app->qrcode;
+$qrcode = Yii::$app->wechat->qrcode;
 ```
 
 ### API

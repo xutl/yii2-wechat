@@ -9,7 +9,7 @@
 <?php
 use Yii;
 
-$url = Yii::$app->url;
+$url = Yii::$app->wechat->url;
 ```
 
 ### API

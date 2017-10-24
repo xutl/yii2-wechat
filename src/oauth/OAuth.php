@@ -12,10 +12,6 @@ use yii\authclient\OAuth2;
 use yii\authclient\OAuthToken;
 use yii\base\Exception;
 
-/**
- * OAuth2 登录认证
- * @package xutl\wechat\oauth
- */
 class OAuth extends OAuth2
 {
     /**
@@ -44,8 +40,8 @@ class OAuth extends OAuth2
     public function init()
     {
         parent::init();
-        $this->clientId = Yii::$app->accessToken->appId;
-        $this->clientSecret = Yii::$app->accessToken->appSecret;
+        $this->clientId = Yii::$app->wechat->appId;
+        $this->clientSecret = Yii::$app->wechat->appSecret;
         if ($this->scope === null) {
             $this->scope = 'snsapi_userinfo';
         }

@@ -11,10 +11,6 @@ use InvalidArgumentException;
 use xutl\wechat\Api;
 use xutl\wechat\message\Article;
 
-/**
- * 素材管理
- * @package xutl\wechat\material
- */
 class Material extends Api
 {
     /**

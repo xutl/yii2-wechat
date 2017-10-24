@@ -7,7 +7,7 @@
 <?php
 use Yii;
 
-$js = Yii::$app->js;
+$js = Yii::$app->wechat->js;
 ```
 
 ### API
