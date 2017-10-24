@@ -23,7 +23,7 @@
 ## Installation
 
 ```shell
-composer require "xutl/yii2-wechat:~1.0" -vvv
+composer require "xutl/yii2-wechat:~2.0" -vvv
 ```
 
 ## Usage
