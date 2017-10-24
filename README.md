@@ -15,7 +15,7 @@
 
 ## Requirement
 
-1. PHP >= 5.5.9
+1. PHP >= 5.6.0
 2. **[composer](https://getcomposer.org/)**
 3. openssl 拓展
 4. fileinfo 拓展（素材管理模块需要用到）
