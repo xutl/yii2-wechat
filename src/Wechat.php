@@ -7,7 +7,6 @@
 
 namespace xutl\wechat;
 
-
 use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;

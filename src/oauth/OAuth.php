@@ -35,6 +35,11 @@ class OAuth extends OAuth2
     public $apiBaseUrl = 'https://api.weixin.qq.com';
 
     /**
+     * @var bool 是否使用openid
+     */
+    public $useOpenId = true;
+
+    /**
      * 初始化组件
      */
     public function init()
@@ -44,6 +49,24 @@ class OAuth extends OAuth2
         $this->clientSecret = Yii::$app->wechat->appSecret;
         if ($this->scope === null) {
             $this->scope = 'snsapi_userinfo';
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function defaultNormalizeUserAttributeMap()
+    {
+        if ($this->useOpenId) {
+            return [
+                'id' => 'openid',
+                'username' => 'nickname',
+            ];
+        } else {
+            return [
+                'id' => 'unionid',
+                'username' => 'nickname',
+            ];
         }
     }
 
