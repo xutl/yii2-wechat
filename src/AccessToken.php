@@ -67,6 +67,7 @@ class AccessToken extends Component
      * @param bool $forceRefresh
      *
      * @return string
+     * @throws Exception
      */
     public function getToken($forceRefresh = false)
     {

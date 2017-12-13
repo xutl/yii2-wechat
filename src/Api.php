@@ -91,6 +91,7 @@ abstract class Api extends Component
      * @param string|array $params
      *
      * @return array
+     * @throws Exception
      */
     public function json($url, $params = [])
     {

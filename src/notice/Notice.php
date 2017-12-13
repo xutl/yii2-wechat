@@ -85,6 +85,7 @@ class Notice extends Api
      * @param int $industryOne 公众号模板消息所属行业编号
      * @param int $industryTwo 公众号模板消息所属行业编号
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function setIndustry($industryOne, $industryTwo)
     {
@@ -98,6 +99,7 @@ class Notice extends Api
     /**
      * 获取设置的行业信息
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function getIndustry()
     {
@@ -109,6 +111,7 @@ class Notice extends Api
      *
      * @param string $shortId
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function addTemplate($shortId)
     {
@@ -120,6 +123,7 @@ class Notice extends Api
      * 获取模板列表
      *
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function getPrivateTemplates()
     {
@@ -132,6 +136,7 @@ class Notice extends Api
      * @param string $templateId
      *
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function deletePrivateTemplate($templateId)
     {
@@ -142,9 +147,9 @@ class Notice extends Api
     /**
      * 发送模板消息
      *
-     * @param $data
      * @param array $data
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function send(array $data = [])
     {

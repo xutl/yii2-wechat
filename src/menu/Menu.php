@@ -22,6 +22,7 @@ class Menu extends Api
     /**
      * Get all menus.
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function all()
     {
@@ -31,6 +32,7 @@ class Menu extends Api
     /**
      * Get current menus.
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function current()
     {
@@ -42,6 +44,7 @@ class Menu extends Api
      * @param array $buttons
      * @param array $matchRule
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function add(array $buttons, array $matchRule = [])
     {
@@ -58,6 +61,7 @@ class Menu extends Api
      * Destroy menu.
      * @param int $menuId
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function destroy($menuId = null)
     {
@@ -71,6 +75,7 @@ class Menu extends Api
      * Test conditional menu.
      * @param string $userId
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function test($userId)
     {

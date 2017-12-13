@@ -58,6 +58,7 @@ class Wechat extends Component
      * Initializes the object.
      * This method is invoked at the end of the constructor after the object is initialized with the
      * given configuration.
+     * @throws InvalidConfigException
      */
     public function init()
     {
@@ -75,6 +76,7 @@ class Wechat extends Component
 
     /**
      * @return object|AccessToken
+     * @throws InvalidConfigException
      */
     public function getAccessToken()
     {
@@ -85,6 +87,7 @@ class Wechat extends Component
 
     /**
      * @return object|OAuth
+     * @throws InvalidConfigException
      */
     public function getOauth()
     {
@@ -95,6 +98,7 @@ class Wechat extends Component
 
     /**
      * @return object|Js
+     * @throws InvalidConfigException
      */
     public function getJs()
     {
@@ -105,6 +109,7 @@ class Wechat extends Component
 
     /**
      * @return object|Notice
+     * @throws InvalidConfigException
      */
     public function getNotice()
     {
@@ -115,6 +120,7 @@ class Wechat extends Component
 
     /**
      * @return object|Url
+     * @throws InvalidConfigException
      */
     public function getUrl()
     {
@@ -125,6 +131,7 @@ class Wechat extends Component
 
     /**
      * @return object|Menu
+     * @throws InvalidConfigException
      */
     public function getMenu(){
         return Yii::createObject([
@@ -134,6 +141,7 @@ class Wechat extends Component
 
     /**
      * @return object|QRCode
+     * @throws InvalidConfigException
      */
     public function getQrcode(){
         return Yii::createObject([
@@ -143,6 +151,7 @@ class Wechat extends Component
 
     /**
      * @return object|Material
+     * @throws InvalidConfigException
      */
     public function getMaterial(){
         return Yii::createObject([
@@ -152,6 +161,7 @@ class Wechat extends Component
 
     /**
      * @return object|Temporary
+     * @throws InvalidConfigException
      */
     public function getMaterialTemporary(){
         return Yii::createObject([

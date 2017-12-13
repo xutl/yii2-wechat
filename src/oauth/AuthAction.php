@@ -144,6 +144,7 @@ class AuthAction extends Action
 
     /**
      * Runs the action.
+     * @throws Exception
      */
     public function run()
     {

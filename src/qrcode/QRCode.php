@@ -31,6 +31,7 @@ class QRCode extends Api
      * @param int $sceneValue
      *
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function forever($sceneValue)
     {
@@ -54,6 +55,7 @@ class QRCode extends Api
      * @param null $expireSeconds
      *
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function temporary($sceneId, $expireSeconds = null)
     {
@@ -76,6 +78,7 @@ class QRCode extends Api
      *  }
      *
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function card($card)
     {
@@ -102,6 +105,7 @@ class QRCode extends Api
      * @param bool $temporary
      * @param int $expireSeconds
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     protected function create($actionName, $actionInfo, $temporary = true, $expireSeconds = null)
     {
