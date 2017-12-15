@@ -8,11 +8,10 @@
 namespace xutl\wechat;
 
 use Yii;
-use yii\base\Component;
-use yii\base\InvalidConfigException;
-use yii\base\InvalidParamException;
-use yii\caching\Cache;
 use yii\di\Instance;
+use yii\caching\Cache;
+use yii\di\ServiceLocator;
+use yii\base\InvalidConfigException;
 use xutl\wechat\js\Js;
 use xutl\wechat\url\Url;
 use xutl\wechat\menu\Menu;
@@ -21,6 +20,7 @@ use xutl\wechat\qrcode\QRCode;
 use xutl\wechat\notice\Notice;
 use xutl\wechat\material\Material;
 use xutl\wechat\material\Temporary;
+
 
 /**
  * Class Wechat
@@ -37,7 +37,7 @@ use xutl\wechat\material\Temporary;
  * @property Cache $cache
  * @package xutl\wechat
  */
-class Wechat extends Component
+class Wechat extends ServiceLocator
 {
     /**
      * @var string
@@ -53,6 +53,32 @@ class Wechat extends Component
      * @var string|Cache
      */
     public $cache = 'cache';
+
+    /**
+     * Payment constructor.
+     * @param array $config
+     */
+    public function __construct($config = [])
+    {
+        $this->preInit($config);
+        parent::__construct($config);
+    }
+
+    /**
+     * 预处理组件
+     * @param array $config
+     */
+    public function preInit(&$config)
+    {
+        // merge core components with custom components
+        foreach ($this->coreComponents() as $id => $component) {
+            if (!isset($config['components'][$id])) {
+                $config['components'][$id] = $component;
+            } elseif (is_array($config['components'][$id]) && !isset($config['components'][$id]['class'])) {
+                $config['components'][$id]['class'] = $component['class'];
+            }
+        }
+    }
 
     /**
      * Initializes the object.
@@ -80,9 +106,7 @@ class Wechat extends Component
      */
     public function getAccessToken()
     {
-        return Yii::createObject([
-            'class' => 'xutl\wechat\AccessToken',
-        ]);
+        return $this->get('accessToken');
     }
 
     /**
@@ -91,9 +115,7 @@ class Wechat extends Component
      */
     public function getOauth()
     {
-        return Yii::createObject([
-            'class' => 'xutl\wechat\oauth\OAuth',
-        ]);
+        return $this->get('oauth');
     }
 
     /**
@@ -102,9 +124,7 @@ class Wechat extends Component
      */
     public function getJs()
     {
-        return Yii::createObject([
-            'class' => 'xutl\wechat\js\Js',
-        ]);
+        return $this->get('js');
     }
 
     /**
@@ -113,9 +133,7 @@ class Wechat extends Component
      */
     public function getNotice()
     {
-        return Yii::createObject([
-            'class' => 'xutl\wechat\notice\Notice',
-        ]);
+        return $this->get('notice');
     }
 
     /**
@@ -124,48 +142,61 @@ class Wechat extends Component
      */
     public function getUrl()
     {
-        return Yii::createObject([
-            'class' => 'xutl\wechat\url\Url',
-        ]);
+        return $this->get('url');
     }
 
     /**
      * @return object|Menu
      * @throws InvalidConfigException
      */
-    public function getMenu(){
-        return Yii::createObject([
-            'class' => 'xutl\wechat\menu\Menu',
-        ]);
+    public function getMenu()
+    {
+        return $this->get('menu');
     }
 
     /**
      * @return object|QRCode
      * @throws InvalidConfigException
      */
-    public function getQrcode(){
-        return Yii::createObject([
-            'class' => 'xutl\wechat\qrcode\QRCode',
-        ]);
+    public function getQrcode()
+    {
+        return $this->get('qrcode');
     }
 
     /**
      * @return object|Material
      * @throws InvalidConfigException
      */
-    public function getMaterial(){
-        return Yii::createObject([
-            'class' => 'xutl\wechat\material\Material',
-        ]);
+    public function getMaterial()
+    {
+        return $this->get('material');
     }
 
     /**
      * @return object|Temporary
      * @throws InvalidConfigException
      */
-    public function getMaterialTemporary(){
-        return Yii::createObject([
-            'class' => 'xutl\wechat\material\Temporary',
-        ]);
+    public function getMaterialTemporary()
+    {
+        return $this->get('materialTemporary');
+    }
+
+    /**
+     * Returns the configuration of wechat components.
+     * @see set()
+     */
+    public function coreComponents()
+    {
+        return [
+            'accessToken' => ['class' => 'xutl\wechat\AccessToken'],
+            'oauth' => ['class' => 'xutl\wechat\oauth\OAuth'],
+            'js' => ['class' => 'xutl\wechat\js\Js'],
+            'notice' => ['class' => 'xutl\wechat\notice\Notice'],
+            'url' => ['class' => 'xutl\wechat\url\Url'],
+            'menu' => ['class' => 'xutl\wechat\menu\Menu'],
+            'qrcode' => ['class' => 'xutl\wechat\qrcode\QRCode'],
+            'material' => ['class' => 'xutl\wechat\material\Material'],
+            'materialTemporary' => ['class' => 'xutl\wechat\material\Temporary'],
+        ];
     }
 }
