@@ -180,6 +180,7 @@ class OAuth extends OAuth2
      * Gets new auth token to replace expired one.
      * @param OAuthToken $token expired auth token.
      * @return OAuthToken new auth token.
+     * @throws \yii\authclient\InvalidResponseException
      */
     public function refreshAccessToken(OAuthToken $token)
     {

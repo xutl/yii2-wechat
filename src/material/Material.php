@@ -33,6 +33,7 @@ class Material extends Api
      * Upload image.
      * @param string $path
      * @return mixed
+     * @throws \yii\httpclient\Exception
      */
     public function uploadImage($path)
     {
@@ -43,6 +44,7 @@ class Material extends Api
      * Upload voice.
      * @param string $path
      * @return mixed
+     * @throws \yii\httpclient\Exception
      */
     public function uploadVoice($path)
     {
@@ -53,6 +55,7 @@ class Material extends Api
      * Upload thumb.
      * @param string $path
      * @return mixed
+     * @throws \yii\httpclient\Exception
      */
     public function uploadThumb($path)
     {
@@ -65,6 +68,7 @@ class Material extends Api
      * @param string $title
      * @param string $description
      * @return mixed
+     * @throws \yii\httpclient\Exception
      */
     public function uploadVideo($path, $title, $description)
     {
@@ -83,6 +87,7 @@ class Material extends Api
      * Upload articles.
      * @param array|Article $articles
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function uploadArticle($articles)
     {
@@ -108,6 +113,7 @@ class Material extends Api
      * @param string $article
      * @param int $index
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function updateArticle($mediaId, $article, $index = 0)
     {
@@ -123,6 +129,7 @@ class Material extends Api
      * Upload image for article.
      * @param string $path
      * @return mixed
+     * @throws \yii\httpclient\Exception
      */
     public function uploadArticleImage($path)
     {
@@ -171,6 +178,7 @@ class Material extends Api
      * Delete material by media ID.
      * @param string $mediaId
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function delete($mediaId)
     {
@@ -199,6 +207,7 @@ class Material extends Api
      * @param int $count
      *
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function lists($type, $offset = 0, $count = 20)
     {
@@ -216,6 +225,7 @@ class Material extends Api
      * @param string $path
      * @param array $form
      * @return mixed
+     * @throws \yii\httpclient\Exception
      */
     protected function uploadMedia($type, $path, array $form = [])
     {
@@ -230,6 +240,7 @@ class Material extends Api
      * Get stats of materials.
      *
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function stats()
     {

@@ -69,6 +69,7 @@ class Js extends Api
      * @param bool $forceRefresh
      *
      * @return string
+     * @throws \yii\httpclient\Exception
      */
     public function ticket($forceRefresh = false)
     {
@@ -89,6 +90,7 @@ class Js extends Api
      * @param int $timestamp
      *
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function signature($url = null, $nonce = null, $timestamp = null)
     {

@@ -25,6 +25,7 @@ class Url extends Api
      *
      * @param string $url
      * @return array
+     * @throws \yii\httpclient\Exception
      */
     public function shorten($url)
     {
