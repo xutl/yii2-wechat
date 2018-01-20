@@ -40,6 +40,22 @@ class OAuth extends OAuth2
     public $useOpenId = true;
 
     /**
+     * @inheritdoc
+     */
+    protected function defaultName()
+    {
+        return 'wechat';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function defaultTitle()
+    {
+        return '微信';
+    }
+
+    /**
      * 初始化组件
      */
     public function init()
@@ -155,7 +171,7 @@ class OAuth extends OAuth2
      */
     protected function initUserAttributes()
     {
-        return $this->api('sns/userinfo', 'GET',[
+        return $this->api('sns/userinfo', 'GET', [
             //'lang'=>
         ]);
     }
