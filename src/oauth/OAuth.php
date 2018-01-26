@@ -73,17 +73,10 @@ class OAuth extends OAuth2
      */
     protected function defaultNormalizeUserAttributeMap()
     {
-        if ($this->useOpenId) {
-            return [
-                'id' => 'openid',
-                'username' => 'nickname',
-            ];
-        } else {
-            return [
-                'id' => 'unionid',
-                'username' => 'nickname',
-            ];
-        }
+        return [
+            'id' => $this->useOpenId ? 'openid' : 'unionid',
+            'username' => 'nickname',
+        ];
     }
 
     /**
@@ -139,8 +132,8 @@ class OAuth extends OAuth2
      */
     public function beforeApiRequestSend($event)
     {
-        $event->request->addData(['openid' => $this->getOpenId()]);
         parent::beforeApiRequestSend($event);
+        $event->request->addData(['openid' => $this->getOpenId()]);
     }
 
     /**
