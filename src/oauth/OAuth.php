@@ -131,7 +131,7 @@ class OAuth extends OAuth2
     {
         $data = $request->getData();
         $data['access_token'] = $accessToken->getToken();
-        $data['openid'] = $this->getOpenId();
+        $data['openid'] = $accessToken->getParam('openid');
         $request->setData($data);
     }
 
