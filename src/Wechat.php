@@ -55,6 +55,11 @@ class Wechat extends ServiceLocator
     public $cache = 'cache';
 
     /**
+     * @var array wechat parameters (name => value).
+     */
+    public $params = [];
+
+    /**
      * Payment constructor.
      * @param array $config
      */
