@@ -124,16 +124,15 @@ class OAuth extends OAuth2
     }
 
     /**
-     * Handles [[Request::EVENT_BEFORE_SEND]] event.
-     * Applies [[accessToken]] to the request.
-     * @param \yii\httpclient\RequestEvent $event event instance.
-     * @throws Exception on invalid access token.
-     * @since 2.1
+     * @param \yii\httpclient\Request $request HTTP request instance.
+     * @param OAuthToken $accessToken access token instance.
      */
-    public function beforeApiRequestSend($event)
+    public function applyAccessTokenToRequest($request, $accessToken)
     {
-        parent::beforeApiRequestSend($event);
-        $event->request->addData(['openid' => $this->getOpenId()]);
+        $data = $request->getData();
+        $data['access_token'] = $accessToken->getToken();
+        $data['openid'] = $this->getOpenId();
+        $request->setData($data);
     }
 
     /**
