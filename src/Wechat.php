@@ -24,8 +24,8 @@ use xutl\wechat\material\Temporary;
 
 /**
  * Class Wechat
- *
- * @property OAuth $oauth
+ * @property OAuth $oAuth 公众平台
+ * @property OAuth $openOAuth 开放平台
  * @property AccessToken $accessToken
  * @property Js $js
  * @property Notice $notice
@@ -35,7 +35,11 @@ use xutl\wechat\material\Temporary;
  * @property Material $material
  * @property Temporary $materialTemporary
  * @property Cache $cache
+ *
  * @package xutl\wechat
+ *
+ * @author Tongle Xu <xutongle@gmail.com>
+ * @since 1.0
  */
 class Wechat extends ServiceLocator
 {
@@ -118,9 +122,18 @@ class Wechat extends ServiceLocator
      * @return object|OAuth
      * @throws InvalidConfigException
      */
-    public function getOauth()
+    public function getOAuth()
     {
         return $this->get('oauth');
+    }
+
+    /**
+     * @return object|OAuth
+     * @throws InvalidConfigException
+     */
+    public function getOpenOAuth()
+    {
+        return $this->get('openOAuth');
     }
 
     /**
@@ -195,6 +208,7 @@ class Wechat extends ServiceLocator
         return [
             'accessToken' => ['class' => 'xutl\wechat\AccessToken'],
             'oauth' => ['class' => 'xutl\wechat\oauth\OAuth'],
+            'openOAuth' => ['class' => 'xutl\wechat\oauth\OAuth'],
             'js' => ['class' => 'xutl\wechat\js\Js'],
             'notice' => ['class' => 'xutl\wechat\notice\Notice'],
             'url' => ['class' => 'xutl\wechat\url\Url'],

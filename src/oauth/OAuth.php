@@ -10,8 +10,14 @@ namespace xutl\wechat\oauth;
 use Yii;
 use yii\authclient\OAuth2;
 use yii\authclient\OAuthToken;
-use yii\base\Exception;
 
+/**
+ * Class OAuth
+ * @package xutl\wechat\oauth
+ *
+ * @author Tongle Xu <xutongle@gmail.com>
+ * @since 1.0
+ */
 class OAuth extends OAuth2
 {
     /**
