@@ -24,7 +24,7 @@ use xutl\wechat\material\Temporary;
 
 /**
  * Class Wechat
- * @property OAuth $oAuth 公众平台
+ * @property OAuth $oauth 公众平台
  * @property OAuth $openOAuth 开放平台
  * @property AccessToken $accessToken
  * @property Js $js
@@ -122,7 +122,7 @@ class Wechat extends ServiceLocator
      * @return object|OAuth
      * @throws InvalidConfigException
      */
-    public function getOAuth()
+    public function getOauth()
     {
         return $this->get('oauth');
     }

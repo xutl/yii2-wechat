@@ -38,7 +38,7 @@ composer require "xutl/yii2-wechat:~2.0" -vvv
             'appId' => 'wx23fc4372b2498821',
             'appSecret' => '5a4014e73817483362d54f77f8bdb6b9',
             'components' => [
-                'oAuth' => [
+                'oauth' => [
                     'useOpenId' => false
                 ],
                 'openOAuth' => [
