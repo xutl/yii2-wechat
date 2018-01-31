@@ -67,8 +67,12 @@ class OAuth extends OAuth2
     public function init()
     {
         parent::init();
-        $this->clientId = Yii::$app->wechat->appId;
-        $this->clientSecret = Yii::$app->wechat->appSecret;
+        if (empty ($this->clientId)) {
+            $this->clientId = Yii::$app->wechat->appId;
+        }
+        if (empty ($this->clientSecret)) {
+            $this->clientSecret = Yii::$app->wechat->appSecret;
+        }
         if ($this->scope === null) {
             $this->scope = 'snsapi_userinfo';
         }
