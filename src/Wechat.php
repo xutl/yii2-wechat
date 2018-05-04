@@ -26,6 +26,7 @@ use xutl\wechat\material\Temporary;
  * Class Wechat
  * @property OAuth $oauth 公众平台
  * @property OAuth $openOAuth 开放平台
+ * @property OAuth $miniProgram 小程序平台
  * @property AccessToken $accessToken
  * @property Js $js
  * @property Notice $notice
@@ -137,6 +138,15 @@ class Wechat extends ServiceLocator
     }
 
     /**
+     * @return object|OAuth
+     * @throws InvalidConfigException
+     */
+    public function getMiniProgram()
+    {
+        return $this->get('miniProgram');
+    }
+
+    /**
      * @return object|Js
      * @throws InvalidConfigException
      */
@@ -209,6 +219,7 @@ class Wechat extends ServiceLocator
             'accessToken' => ['class' => 'xutl\wechat\AccessToken'],
             'oauth' => ['class' => 'xutl\wechat\oauth\OAuth'],
             'openOAuth' => ['class' => 'xutl\wechat\oauth\OAuth'],
+            'miniProgram' => ['class' => 'xutl\wechat\oauth\OAuth'],
             'js' => ['class' => 'xutl\wechat\js\Js'],
             'notice' => ['class' => 'xutl\wechat\notice\Notice'],
             'url' => ['class' => 'xutl\wechat\url\Url'],
