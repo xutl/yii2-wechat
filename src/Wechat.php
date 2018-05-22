@@ -219,7 +219,7 @@ class Wechat extends ServiceLocator
             'accessToken' => ['class' => 'xutl\wechat\AccessToken'],
             'oauth' => ['class' => 'xutl\wechat\oauth\OAuth'],
             'openOAuth' => ['class' => 'xutl\wechat\oauth\OAuth'],
-            'miniProgram' => ['class' => 'xutl\wechat\oauth\OAuth'],
+            'miniProgram' => ['class' => 'xutl\wechat\oauth\MiniOAuth'],
             'js' => ['class' => 'xutl\wechat\js\Js'],
             'notice' => ['class' => 'xutl\wechat\notice\Notice'],
             'url' => ['class' => 'xutl\wechat\url\Url'],
