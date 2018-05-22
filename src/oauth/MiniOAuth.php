@@ -7,15 +7,13 @@
 
 namespace xutl\wechat\oauth;
 
-use Yii;
-use yii\authclient\OAuth2;
-use yii\web\HttpException;
+use xutl\authclient\WeChat;
 
 /**
  * 微信小程序定制
  * @package xutl\wechat\oauth
  */
-class MiniOAuth extends OAuth2
+class MiniOAuth extends WeChat
 {
     /**
      * @inheritdoc
@@ -26,6 +24,8 @@ class MiniOAuth extends OAuth2
      * @var bool 是否使用openid
      */
     public $useOpenId = true;
+
+    private $userParams = [];
 
     /**
      * 获取Token
@@ -51,6 +51,7 @@ class MiniOAuth extends OAuth2
         $response = $this->sendRequest($request);
 
         $token = $this->createToken(['params' => $response]);
+        $this->userParams = $response;
         $this->setAccessToken($token);
 
         return $token;
@@ -83,6 +84,6 @@ class MiniOAuth extends OAuth2
      */
     protected function initUserAttributes()
     {
-        return [];
+        return $this->userParams;
     }
 }

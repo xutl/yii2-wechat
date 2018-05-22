@@ -7,6 +7,7 @@
 
 namespace xutl\wechat;
 
+use xutl\wechat\oauth\MiniOAuth;
 use Yii;
 use yii\di\Instance;
 use yii\caching\Cache;
@@ -26,7 +27,7 @@ use xutl\wechat\material\Temporary;
  * Class Wechat
  * @property OAuth $oauth 公众平台
  * @property OAuth $openOAuth 开放平台
- * @property OAuth $miniProgram 小程序平台
+ * @property MiniOAuth $miniProgram 小程序平台
  * @property AccessToken $accessToken
  * @property Js $js
  * @property Notice $notice
