@@ -4,6 +4,7 @@
  * @copyright Copyright (c) 2012 TintSoft Technology Co. Ltd.
  * @license http://www.tintsoft.com/license/
  */
+
 namespace xutl\wechat\oauth;
 
 use Yii;
@@ -50,7 +51,11 @@ class AuthAction extends \yii\authclient\AuthAction
      */
     public function run()
     {
-        $client = Yii::$app->wechat->oauth;
-        return $this->auth($client);
+        if (Yii::$app->user->isGuest) {
+            $client = Yii::$app->wechat->oauth;
+            return $this->auth($client);
+        } else {
+            return $this->controller->goHome();
+        }
     }
 }
