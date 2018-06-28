@@ -74,6 +74,22 @@ class OAuth extends WeChat
     }
 
     /**
+     * @inheritdoc
+     */
+    protected function defaultName()
+    {
+        return 'wechat';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function defaultTitle()
+    {
+        return Yii::t('app', 'Wechat');
+    }
+
+    /**
      * Composes user authorization URL.
      * @param array $params additional auth GET params.
      * @return string authorization URL.

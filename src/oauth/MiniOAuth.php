@@ -8,6 +8,7 @@
 namespace xutl\wechat\oauth;
 
 use xutl\authclient\WeChat;
+use Yii;
 
 /**
  * 微信小程序定制
@@ -77,6 +78,22 @@ class MiniOAuth extends WeChat
         return [
             'id' => $this->useOpenId ? 'openid' : 'unionid',
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function defaultName()
+    {
+        return 'wechat';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function defaultTitle()
+    {
+        return Yii::t('app', 'Wechat');
     }
 
     /**
