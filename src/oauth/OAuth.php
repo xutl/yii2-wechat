@@ -45,6 +45,8 @@ class OAuth extends WeChat
      */
     public $useOpenId = true;
 
+    public $defaultName = 'wechat';
+
     /**
      * @inheritdoc
      */
@@ -78,7 +80,7 @@ class OAuth extends WeChat
      */
     protected function defaultName()
     {
-        return 'wechat';
+        return $this->defaultName;
     }
 
     /**
