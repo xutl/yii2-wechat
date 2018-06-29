@@ -85,7 +85,7 @@ class MiniOAuth extends WeChat
      */
     protected function defaultName()
     {
-        return 'wechat';
+        return 'wechat_mini';
     }
 
     /**
